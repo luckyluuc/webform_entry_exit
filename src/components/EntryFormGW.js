@@ -168,18 +168,30 @@ const EntryFormGW = (props) => {
       return;
     }
 
+    const dateOfEntry = dateOfEntryValue;
+    const title = titleValue;
+    const firstName = firstNameValue;
+    const lastName = lastNameValue;
+    const mail = mailValue;
+    const phone = phoneValue;
+    const workplace = workplaceValue;
+    const role = roleValue;
+    const distributionList = distributionListValue;
+    const drive = driveValue;
+    const sendLogin = sendLoginValue;
+
     const entryGW = {
-      dateOfEntryValue,
-      titleValue,
-      firstNameValue,
-      lastNameValue,
-      mailValue,
-      phoneValue,
-      workplaceValue,
-      roleValue,
-      distributionListValue,
-      driveValue,
-      sendLoginValue,
+      dateOfEntry,
+      title,
+      firstName,
+      lastName,
+      mail,
+      phone,
+      workplace,
+      role,
+      distributionList,
+      drive,
+      sendLogin,
     };
 
     addInputHandler(entryGW);

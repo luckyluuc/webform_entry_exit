@@ -11,7 +11,7 @@ const EntryFormALK = (props) => {
     isValid: dateOfEntryIsValid,
     hasError: dateOfEntryHasError,
     valueChangeHandler: dateOfEntryChangeHandler,
-    inputBlurHandler : dateOfEntryBlurHandler,
+    inputBlurHandler: dateOfEntryBlurHandler,
     reset: resetdateOfEntry,
   } = useInput(isNotEmpty);
 
@@ -20,7 +20,7 @@ const EntryFormALK = (props) => {
     isValid: titleIsValid,
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
-    inputBlurHandler : titleBlurHandler,
+    inputBlurHandler: titleBlurHandler,
     reset: resetTitle,
   } = useInput(isNotEmpty);
 
@@ -29,7 +29,7 @@ const EntryFormALK = (props) => {
     isValid: firstNameIsValid,
     hasError: firstNameHasError,
     valueChangeHandler: firstNameChangeHandler,
-    inputBlurHandler : firstNameBlurHandler,
+    inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
   } = useInput(isNotEmpty);
 
@@ -38,7 +38,7 @@ const EntryFormALK = (props) => {
     isValid: lastNameIsValid,
     hasError: lastNameHasError,
     valueChangeHandler: lastNameChangeHandler,
-    inputBlurHandler : lastNameBlurHandler,
+    inputBlurHandler: lastNameBlurHandler,
     reset: resetLastName,
   } = useInput(isNotEmpty);
 
@@ -47,7 +47,7 @@ const EntryFormALK = (props) => {
     isValid: mailIsValid,
     hasError: mailHasError,
     valueChangeHandler: mailChangeHandler,
-    inputBlurHandler : mailBlurHandler,
+    inputBlurHandler: mailBlurHandler,
     reset: resetMail,
   } = useInput(isEmail);
 
@@ -56,7 +56,7 @@ const EntryFormALK = (props) => {
     isValid: phoneIsValid,
     hasError: phoneHasError,
     valueChangeHandler: phoneChangeHandler,
-    inputBlurHandler : phoneBlurHandler,
+    inputBlurHandler: phoneBlurHandler,
     reset: resetPhone,
   } = useInput(isPhonenumber);
 
@@ -65,7 +65,7 @@ const EntryFormALK = (props) => {
     isValid: workplaceIsValid,
     hasError: workplaceHasError,
     valueChangeHandler: workplaceChangeHandler,
-    inputBlurHandler : workplaceBlurHandler,
+    inputBlurHandler: workplaceBlurHandler,
     reset: resetWorkplace,
   } = useInput(isNotEmpty);
 
@@ -74,7 +74,7 @@ const EntryFormALK = (props) => {
     isValid: roleIsValid,
     hasError: roleHasError,
     valueChangeHandler: roleChangeHandler,
-    inputBlurHandler : roleBlurHandler,
+    inputBlurHandler: roleBlurHandler,
     reset: resetRole,
   } = useInput(isNotEmpty);
 
@@ -83,7 +83,7 @@ const EntryFormALK = (props) => {
     isValid: distributionListIsValid,
     hasError: distributionListHasError,
     valueChangeHandler: distributionListChangeHandler,
-    inputBlurHandler : distributionListBlurHandler,
+    inputBlurHandler: distributionListBlurHandler,
     reset: resetDistributionList,
   } = useInput(isNotEmpty);
 
@@ -92,7 +92,7 @@ const EntryFormALK = (props) => {
     isValid: driveIsValid,
     hasError: driveHasError,
     valueChangeHandler: driveChangeHandler,
-    inputBlurHandler : driveBlurHandler,
+    inputBlurHandler: driveBlurHandler,
     reset: resetDrive,
   } = useInput(isNotEmpty);
 
@@ -101,7 +101,7 @@ const EntryFormALK = (props) => {
     isValid: sendLoginIsValid,
     hasError: sendLoginHasError,
     valueChangeHandler: sendLoginChangeHandler,
-    inputBlurHandler : sendLoginBlurHandler,
+    inputBlurHandler: sendLoginBlurHandler,
     reset: resetSendLogin,
   } = useInput(isNotEmpty);
 
@@ -139,47 +139,64 @@ const EntryFormALK = (props) => {
     ? "form-control invalid"
     : "form-control";
   const roleClasses = roleHasError ? "form-control invalid" : "form-control";
-  const distributionListClasses = distributionListHasError ? "form-control invalid" : "form-control";
+  const distributionListClasses = distributionListHasError
+    ? "form-control invalid"
+    : "form-control";
   const driveClasses = driveHasError ? "form-control invalid" : "form-control";
   const sendLoginClasses = sendLoginHasError
     ? "form-control invalid"
     : "form-control";
 
-    async function addInputHandler(entryALK) {
-      const response = await fetch('https://webform-entry-exit-default-rtdb.firebaseio.com/entryALK.json', {
-        method: 'POST',
+  async function addInputHandler(entryALK) {
+    const response = await fetch(
+      "https://webform-entry-exit-default-rtdb.firebaseio.com/entryALK.json",
+      {
+        method: "POST",
         body: JSON.stringify(entryALK),
         headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await response.json();
-      console.log(data);
-    }
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  }
 
   const submitHandler = (event) => {
     event.preventDefault();
- 
+
     if (!formIsValid) {
       return;
     }
 
+    const dateOfEntry = dateOfEntryValue;
+    const title = titleValue;
+    const firstName = firstNameValue;
+    const lastName = lastNameValue;
+    const mail = mailValue;
+    const phone = phoneValue;
+    const workplace = workplaceValue;
+    const role = roleValue;
+    const distributionList = distributionListValue;
+    const drive = driveValue;
+    const sendLogin = sendLoginValue;
+
     const entryALK = {
-      dateOfEntryValue,
-      titleValue,
-      firstNameValue,
-      lastNameValue,
-      mailValue,
-      phoneValue,
-      workplaceValue,
-      roleValue,
-      distributionListValue,
-      driveValue,
-      sendLoginValue
+      dateOfEntry,
+      title,
+      firstName,
+      lastName,
+      mail,
+      phone,
+      workplace,
+      role,
+      distributionList,
+      drive,
+      sendLogin,
     };
 
     addInputHandler(entryALK);
-          
+
     resetdateOfEntry();
     resetTitle();
     resetFirstName();
@@ -214,7 +231,11 @@ const EntryFormALK = (props) => {
       <div className="control-group1">
         <div className={titleClasses}>
           <label>Anrede</label>
-          <select id="title" onChange={titleChangeHandler} onBlur={titleBlurHandler}>
+          <select
+            id="title"
+            onChange={titleChangeHandler}
+            onBlur={titleBlurHandler}
+          >
             <option value=""></option>
             <option value="Frau">Frau</option>
             <option value="Herr">Herr</option>
@@ -281,7 +302,11 @@ const EntryFormALK = (props) => {
       <div className="control-group3">
         <div className={workplaceClasses}>
           <label>Arbeitsort</label>
-          <select id="arbeitsort" onChange={workplaceChangeHandler} onBlur={workplaceBlurHandler}>
+          <select
+            id="arbeitsort"
+            onChange={workplaceChangeHandler}
+            onBlur={workplaceBlurHandler}
+          >
             <option value=""></option>
             <option value="Brugg">Brugg</option>
             <option value="Bulle">Bulle</option>
@@ -315,12 +340,18 @@ const EntryFormALK = (props) => {
         </div>
       </div>
       <div className="control-group4">
-      <div className={distributionListClasses}>
+        <div className={distributionListClasses}>
           <label>Verteilerliste(n)</label>
-          <select id="distributionListe" onChange={distributionListChangeHandler} onBlur={distributionListBlurHandler}> 
+          <select
+            id="distributionListe"
+            onChange={distributionListChangeHandler}
+            onBlur={distributionListBlurHandler}
+          >
             <option value=""></option>
             <option value="Führungsteam">Führungsteam</option>
-            <option value="Sitzung Zahlstellenleitung">Sitzung Zahlstellenleitung</option>
+            <option value="Sitzung Zahlstellenleitung">
+              Sitzung Zahlstellenleitung
+            </option>
             <option value="Rechtsdienst D">Rechtsdienst D</option>
             <option value="Rechtsdienst F">Rechtsdienst F</option>
           </select>
@@ -330,7 +361,11 @@ const EntryFormALK = (props) => {
         </div>
         <div className={driveClasses}>
           <label>Zugriff Laufwerk G</label>
-          <select id="laufwerk" onChange={driveChangeHandler} onBlur={driveBlurHandler}>
+          <select
+            id="laufwerk"
+            onChange={driveChangeHandler}
+            onBlur={driveBlurHandler}
+          >
             <option value=""></option>
             <option value="Brugg">Brugg</option>
             <option value="Bulle">Bulle</option>
@@ -372,10 +407,10 @@ const EntryFormALK = (props) => {
       </div>
 
       <div className="form-actions">
-        <button type="button" onClick={props.onCancel}>Zurück</button>
-        <button disabled={!formIsValid}>
-          Senden
+        <button type="button" onClick={props.onCancel}>
+          Zurück
         </button>
+        <button disabled={!formIsValid}>Senden</button>
       </div>
     </form>
   );

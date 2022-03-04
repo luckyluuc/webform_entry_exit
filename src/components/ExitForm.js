@@ -85,11 +85,16 @@ const ExitForm = (props) => {
       return;
     }
 
+    const dateOfExit = dateOfExitValue;
+    const lastWorkday = lastWorkdayValue;
+    const firstName = firstNameValue;
+    const lastName = lastNameValue;
+
     const exit = {
-      dateOfExitValue,
-      lastWorkdayValue,
-      firstNameValue,
-      lastNameValue,
+      dateOfExit,
+      lastWorkday,
+      firstName,
+      lastName,
     };
 
     addInputHandler(exit);
